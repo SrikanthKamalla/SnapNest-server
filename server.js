@@ -63,7 +63,5 @@ app.use("/api", routes);
 app.get("/", (req, res) => {
   res.send("API is working!");
 });
-app.listen(PORT, () => {
-  console.log("appp is running");
-});
+
 export default app;
