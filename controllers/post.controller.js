@@ -16,6 +16,10 @@ export const uploadToDisk = async (req, res) => {
 // };
 
 export const uploadToCloudinary = async (req, res) => {
+  console.log("in cloudinary");
+  if (!req.file) {
+    return sendResponse(res, "No file uploaded", 400);
+  }
   try {
     const uploadedDetails = await cloudinaryjs.uploader.upload(req.file.path, {
       folder: "posts",
@@ -153,10 +157,10 @@ export const getLoggedInUserPosts = async (req, res) => {
 };
 export const getAllPosts = async (req, res) => {
   try {
-    const foundPosts = await Post.find({ isScheduled: false });
-    if (!foundPosts || foundPosts.length == 0) {
-      return sendResponse(res, "No Post found", 400);
-    }
+    const foundPosts = await Post.find({ isScheduled: false }).populate(
+      "user",
+      "name"
+    );
     sendResponse(res, "Post Fetched Successfully!", 200, { posts: foundPosts });
   } catch (error) {
     sendResponse(res, error.message, 404);

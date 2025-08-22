@@ -10,10 +10,10 @@ import {
   loggedInUserInfo,
   updateUserInfo,
   followUser,
-  unFollowUser,
   deactivateUser,
   getFollowers,
   getFollowings,
+  unFollowUser,
 } from "../controllers/user.controller.js";
 import authorize from "../middlewares/authorize.js";
 import {
@@ -73,7 +73,7 @@ router.get(
 router.put("/user/follow/:id", isLoggedIn, followUser);
 router.put("/user/unfollow/:id", isLoggedIn, unFollowUser);
 router.get("/user/followers", isLoggedIn, getFollowers);
-router.get("/user/following", isLoggedIn, getFollowings);
+router.get("/user/followings", isLoggedIn, getFollowings);
 
 router.put("/user/deactivateUser", isLoggedIn, deactivateUser);
 
