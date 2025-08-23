@@ -11,7 +11,7 @@ export const signup = async (req, res) => {
     res.status(201).json({
       data: null,
       message: "User already exists",
-      success: true,
+      success: false,
     });
   }
   try {

@@ -147,7 +147,7 @@ export const getLoggedInUserPosts = async (req, res) => {
     const foundPosts = await Post.find({
       user: req.user.id,
       isScheduled: false,
-    });
+    }).populate("user", "name");
     sendResponse(res, "All Posts Fetched Successfully!", 200, {
       posts: foundPosts || [],
     });
@@ -161,7 +161,9 @@ export const getAllPosts = async (req, res) => {
       "user",
       "name"
     );
-    sendResponse(res, "Post Fetched Successfully!", 200, { posts: foundPosts });
+    sendResponse(res, "Post Fetched Successfully!", 200, {
+      posts: foundPosts || [],
+    });
   } catch (error) {
     sendResponse(res, error.message, 404);
   }
